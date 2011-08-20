@@ -13,6 +13,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="ListRecords">
+        	<intent-filter>
+        		<action android:name="com.comli.ilxm.intent.action.listRecords"/>
+        		<category android:name="android.intent.category.DEFAULT"/>
+        	</intent-filter>
+        </activity>
 
     </application>
 </manifest>
