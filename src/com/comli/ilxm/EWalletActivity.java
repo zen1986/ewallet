@@ -1,7 +1,10 @@
 package com.comli.ilxm;
 
 
+import java.util.Calendar;
+
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -17,6 +20,9 @@ import android.widget.TimePicker;
 public class EWalletActivity extends Activity {
 	public static Database db;
 	public static String TAG = "eWallet";
+	static final int DEFAULTDATESELECTOR_ID = 0;
+	EditText dateTxt, amount, description;
+	Button addNew;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,29 +31,54 @@ public class EWalletActivity extends Activity {
         
         db = new Database(this);
         
-        final EditText amount = (EditText) findViewById(R.id.amount);
-        final EditText description = (EditText) findViewById(R.id.description);
-        final DatePicker createDate = (DatePicker) findViewById(R.id.datePicker1);
-        final TimePicker createTime = (TimePicker) findViewById(R.id.timePicker1);
-        final Button addNew = (Button) findViewById(R.id.add_new_record);
+        amount = (EditText) findViewById(R.id.amount);
+        description = (EditText) findViewById(R.id.description);
+        addNew = (Button) findViewById(R.id.add_new_record);
+        dateTxt = (EditText) findViewById(R.id.date);
         addNew.setOnClickListener(new View.OnClickListener() {
 			
-			@Override
 			public void onClick(View v) {
 				float amt = Float.parseFloat(amount.getText().toString());
 				String desc = description.getText().toString();
-				int cDate_day = createDate.getDayOfMonth();
-				int cDate_month = createDate.getMonth()+1;
-				int cDate_year = createDate.getYear();
-				int cTime_hour = createTime.getCurrentHour();
-				int cTime_min = createTime.getCurrentMinute();
-				String dateTime = cDate_year+"/"+cDate_month+"/"+cDate_day+" "+cTime_hour+":"+cTime_min;
-				db.insertRecord(amt, desc, dateTime);
+				String dat = dateTxt.getText().toString();
+				db.insertRecord(amt, desc, dat);
 				
 				amount.setText("");
 				description.setText("");
 			}
 		});
+        final Button timeSlider = (Button) findViewById(R.id.show_timeSlider);
+        
+        timeSlider.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View v) {
+				showDialog(DEFAULTDATESELECTOR_ID);
+			}
+		});
+    }
+    
+    // define the listener which is called once a user selected the date.
+    private DateSlider.OnDateSetListener mDateSetListener =
+        new DateSlider.OnDateSetListener() {
+            public void onDateSet(DateSlider view, Calendar selectedDate) {
+                // update the dateText view with the corresponding date
+                dateTxt.setText(String.format("%n%te. %tB %tY", selectedDate, selectedDate, selectedDate));
+            }
+    };
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        // this method is called after invoking 'showDialog' for the first time
+        // here we initiate the corresponding DateSlideSelector and return the dialog to its caller
+    	
+    	// get today's date and time
+        final Calendar c = Calendar.getInstance();
+        
+        switch (id) {
+        case DEFAULTDATESELECTOR_ID:
+            return new DefaultDateSlider(this,mDateSetListener,c);
+        }
+        return null;
     }
     
     @Override

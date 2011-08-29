@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent"
     android:layout_height="wrap_content">
-<LinearLayout
-    android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical">
-<LinearLayout android:id="@+id/linearLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="horizontal">
-<TextView android:id="@+id/textView1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Amount"></TextView>
-<EditText android:layout_width="fill_parent" android:layout_height="wrap_content" android:inputType="numberDecimal" android:id="@+id/amount"></EditText>
-</LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical">
+		<LinearLayout android:id="@+id/linearLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="horizontal">
+			<TextView android:id="@+id/textView1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Amount"></TextView>
+			<EditText android:layout_width="fill_parent" android:layout_height="wrap_content" android:inputType="numberDecimal" android:id="@+id/amount"></EditText>
+		</LinearLayout>
 
-<TextView android:id="@+id/textView2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Description"></TextView>
-<EditText android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/description"></EditText>
-<DatePicker android:id="@+id/datePicker1" android:layout_width="wrap_content" android:layout_height="wrap_content"></DatePicker>
-<TimePicker android:id="@+id/timePicker1" android:layout_width="wrap_content" android:layout_height="wrap_content"></TimePicker>
-<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/add_new_record" android:text="Button"></Button>
-</LinearLayout>
+		<TextView android:id="@+id/textView2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Description"></TextView>
+		<EditText android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/description"></EditText>
+		<EditText android:id="@+id/date" android:layout_height="wrap_content" android:layout_width="fill_parent" android:inputType="date"/>
+		<Button android:text="Show Timer Slider" android:id="@+id/show_timeSlider" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+		<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/add_new_record" android:text="Add entry"/>
+	</LinearLayout>
 </ScrollView>
+
